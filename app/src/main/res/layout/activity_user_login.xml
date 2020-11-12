@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserLogin"
+    android:background="@drawable/bgregister">
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="161.7dp"
+        android:layout_height="169dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="99.3dp"
+        android:layout_marginTop="34.3dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginRight="123dp"
+        app:srcCompat="@drawable/logo"
+        android:contentDescription="@string/logo"
+        android:layout_marginStart="99.3dp" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView7"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="161dp"
+        android:layout_marginRight="161dp"
+        android:layout_marginBottom="-55dp"
+        android:fontFamily="@font/gontserratbold"
+        android:text="@string/login"
+        android:textColor="@color/black"
+        android:textSize="28sp" />
+
+    <EditText
+        android:id="@+id/loguserpassword"
+        android:layout_width="364dp"
+        android:layout_height="49dp"
+        android:layout_alignBottom="@+id/loguseremail"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="-111dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:ems="10"
+        android:fontFamily="@font/poppinssemibold"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/loguseremail"
+        android:layout_width="364dp"
+        android:layout_height="49dp"
+        android:layout_below="@+id/imageView7"
+        android:layout_alignBottom="@+id/regusername"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="-72dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:ems="10"
+        android:fontFamily="@font/poppinssemibold"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/loginbtn"
+        android:layout_width="321dp"
+        android:layout_height="61dp"
+        android:layout_alignBottom="@+id/loguserpassword"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="43dp"
+        android:layout_marginRight="43dp"
+        android:layout_marginBottom="-105dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/poppinssemibold"
+        android:text="@string/login"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/toregisterlink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/loginbtn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="-80dp"
+        android:fontFamily="@font/gontserratbold"
+        android:text="@string/register"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+</RelativeLayout>

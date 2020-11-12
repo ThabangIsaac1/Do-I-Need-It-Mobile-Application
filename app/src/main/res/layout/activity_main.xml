@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/splashonebg">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="151dp"
+        android:layout_height="278dp"
+        android:layout_marginStart="122.7dp"
+        android:layout_marginLeft="122.7dp"
+        android:layout_marginTop="184.7dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginBottom="255.3dp"
+        android:contentDescription="@string/mobile_device"
+        app:srcCompat="@drawable/device" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="268dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/imageView3"
+        android:layout_alignLeft="@+id/imageView3"
+        android:layout_alignEnd="@+id/imageView3"
+        android:layout_alignRight="@+id/imageView3"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_marginStart="-36dp"
+        android:layout_marginLeft="-36dp"
+        android:layout_marginEnd="-38dp"
+        android:layout_marginRight="-38dp"
+        android:layout_marginBottom="-68dp"
+        android:fontFamily="@font/gontserratregular"
+        android:gravity="center_horizontal"
+        android:text="@string/Saving"
+        android:textColor="#a5a5a5"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="200dp"
+        android:layout_height="77dp"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_marginStart="-14dp"
+        android:layout_marginLeft="-14dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="-28dp"
+        android:layout_marginRight="-28dp"
+        android:layout_marginBottom="128.5dp"
+        android:contentDescription="@string/text01"
+        app:srcCompat="@drawable/text01" />
+
+    <TextView
+        android:id="@+id/loginLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginEnd="185dp"
+        android:layout_marginRight="185dp"
+        android:layout_marginBottom="-49dp"
+        android:layout_toStartOf="@+id/nextbtn"
+        android:layout_toLeftOf="@+id/nextbtn"
+        android:fontFamily="@font/gontserratbold"
+        android:text="@string/Skip"
+        android:textColor="@color/fuel_orange" />
+
+    <Button
+        android:id="@+id/nextbtn"
+        android:layout_width="53dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginEnd="-27dp"
+        android:layout_marginRight="-27dp"
+        android:layout_marginBottom="-54dp"
+        android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+        android:drawableEnd="@drawable/ic_baseline_navigate_next_24" />
+
+</RelativeLayout>

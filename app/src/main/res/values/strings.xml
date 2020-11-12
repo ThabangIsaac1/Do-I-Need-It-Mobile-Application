@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Do I Need it ?</string>
+    <string name="mobile_device">mobile_device</string>
+    <string name="text01">text01</string>
+    <string name="skip_steps">Skip steps</string>
+    <string name="welcome_to_the_next_line_of_saving_cherishing_every_little_penny_you_have">Welcome to the next line of saving. Cherishing every little penny you have.</string>
+    <string name="start">Start</string>
+    <string name="Saving">Welcome to the next line of saving. Cherishing every little penny you have.</string>
+    <string name="Skip">Skip steps</string>
+    <string name="next">Next</string>
+    <string name="businesslady">BusinessLady</string>
+    <string name="second_on_board">Second On Board</string>
+    <string name="logo">Logo</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+</resources>
