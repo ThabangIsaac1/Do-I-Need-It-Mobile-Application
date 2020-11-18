@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Do_I_Need_it">
-        <activity android:name=".UserRegisteration"></activity>
+        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".UserRegisteration" />
         <activity android:name=".UserLogin" />
         <activity android:name=".OnBoardScreenThree" />
         <activity android:name=".onBoardScreenTwo" />
