@@ -8,15 +8,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 Button button;
 TextView txt;
+FirebaseAuth fireAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txt = (TextView) findViewById(R.id.loginLink);
         button = (Button) findViewById(R.id.nextbtn);
+
+        fireAuth = FirebaseAuth.getInstance();
+        if(fireAuth.getCurrentUser() != null) {
+         startActivity(new Intent(getApplicationContext(), MainActivity2.class));
+        finish();
+        }
+
 
         txt.setOnClickListener(new View.OnClickListener() {
             @Override

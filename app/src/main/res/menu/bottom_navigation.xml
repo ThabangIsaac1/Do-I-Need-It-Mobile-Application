@@ -13,10 +13,12 @@
         android:title="@string/profile"
         />
 
+
+
     <item
-        android:id="@+id/nav_more"
-        android:icon="@drawable/more"
-        android:title="@string/more"
+        android:id="@+id/nav_add"
+        android:icon="@drawable/shopping_cart"
+        android:title="@string/add"
         />
 
 

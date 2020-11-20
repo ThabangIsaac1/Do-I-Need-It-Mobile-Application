@@ -3,6 +3,7 @@ package com.example.do_i_need_it;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +16,10 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        ((FragmentTransaction) tx).replace(R.id.fragment_container, new HomeFragment());
+        tx.commit();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bttm_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
@@ -33,6 +38,9 @@ public class MainActivity2 extends AppCompatActivity {
                            selectedFragment = new HomeFragment();
                        break;
                        case R.id.nav_profile:
+                           selectedFragment = new ProfileFragment();
+                           break;
+                       case R.id.nav_add:
                            selectedFragment = new ProfileFragment();
                            break;
                    }
