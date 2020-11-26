@@ -1,14 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fuel_orange">
+    android:background="@drawable/profilebg">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="56dp"
+        app:civ_border_color="@color/fuel_orange"
+        android:src="@drawable/userprof"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="30dp"
-        android:text="Profy" />
-</RelativeLayout>
+        android:id="@+id/textView2"
+        android:layout_width="108.7dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/poppinssemibold"
+        android:gravity="center"
+        android:text="@string/profile"
+        android:textColor="@color/fuel_orange"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/profupdatebtn"
+        android:layout_width="166dp"
+        android:layout_height="57dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:fontFamily="@font/poppinssemibold"
+        android:text="@string/update"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profpassword" />
+
+    <EditText
+        android:id="@+id/profemail"
+        android:layout_width="364dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:ems="10"
+        android:fontFamily="@font/poppinssemibold"
+        android:hint="@string/email"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profusername" />
+
+    <EditText
+        android:id="@+id/profpassword"
+        android:layout_width="364dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:ems="10"
+        android:fontFamily="@font/poppinssemibold"
+        android:hint="@string/password"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profemail" />
+
+    <EditText
+        android:id="@+id/profusername"
+        android:layout_width="364dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="88dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:ems="10"
+        android:fontFamily="@font/poppinssemibold"
+        android:hint="@string/username"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

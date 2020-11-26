@@ -4,7 +4,7 @@
 
     >
 
-    <solid android:color="@color/fuel_orange"/>
+    <solid android:color="#FFA700"/>
     <corners
         android:topRightRadius="32dp"
         android:topLeftRadius="32dp"

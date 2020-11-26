@@ -17,7 +17,6 @@
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="home">Home</string>
-    <string name="profile">Profile</string>
     <string name="more">More</string>
     <string name="dashboard">DASHBOARD</string>
     <string name="thabang">Thabang</string>
@@ -28,4 +27,8 @@
     <string name="items_purchased">Items Purchased</string>
     <string name="items_deleted">Items Deleted</string>
     <string name="add">Add</string>
+    <string name="profile">Profile</string>
+    <string name="update">Update</string>
+    <string name="additem">addItem</string>
+    <string name="share">Share</string>
 </resources>
