@@ -289,5 +289,18 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ImageView
+        android:id="@+id/logoutAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/displayusername"
+        android:layout_alignRight="@+id/displayusername"
+        android:layout_alignBottom="@+id/displayusername"
+        android:layout_marginEnd="-31dp"
+        android:layout_marginRight="-31dp"
+        android:layout_marginBottom="1dp"
+        app:srcCompat="@drawable/ic_baseline_exit_to_app_24"
+        tools:ignore="VectorDrawableCompat" />
+
 
 </RelativeLayout>

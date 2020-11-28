@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+    <EditText
+        android:id="@+id/productName"
+        android:layout_width="389dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="4dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:fontFamily="@font/gontserratbold"
+        android:hint="productName" />
+
+    <EditText
+        android:id="@+id/productDescription"
+        android:layout_width="388dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/fuel_orange"
+        android:fontFamily="@font/gontserratbold"
+        android:hint="productDescription"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+
+        <EditText
+            android:id="@+id/productSite"
+            android:layout_width="199dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/fuel_orange"
+            android:fontFamily="@font/gontserratbold"
+            android:hint="WebsiteUrl"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/productImage"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/productPrice"
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/fuel_orange"
+            android:fontFamily="@font/gontserratbold"
+            android:hint="productPrice"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/productSite"
+            app:layout_constraintEnd_toStartOf="@+id/productImage"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/productImage"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/four"
+
+            app:civ_border_color="@color/fuel_orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Use this location?"
+        android:textColor="@color/fuel_orange"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"/>
+
+
+    <com.google.android.gms.maps.MapView
+        android:layout_width="match_parent"
+        android:id="@+id/mapp"
+        android:layout_marginTop="20dp"
+        android:layout_height="150dp"
+        android:background="@color/white"/>
+
+    <Button
+        android:id="@+id/Change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:text="Select Location"
+        android:textColor="#000"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="right"
+
+        >
+
+        <Button
+
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="Save"
+            android:layout_marginRight="25dp"
+            android:textColor="#000" />
+
+    </LinearLayout>
+</LinearLayout>
