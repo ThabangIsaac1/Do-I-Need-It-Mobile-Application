@@ -31,5 +31,9 @@
     <string name="update">Update</string>
     <string name="additem">addItem</string>
     <string name="share">Share</string>
-    <string name="Api">AIzaSyATj0tNw-3GQVP7NktioMJEnZkUt8pfJaU</string>
+    <string name="Api">AIzaSyADI0h-cdgHA698LP8MYNEwezBp8LUWkbc</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>
+
+
 </resources>

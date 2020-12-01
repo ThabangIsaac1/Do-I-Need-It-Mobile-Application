@@ -41,8 +41,10 @@ public class MainActivity2 extends AppCompatActivity {
                            selectedFragment = new ProfileFragment();
                            break;
                        case R.id.nav_add:
-                           selectedFragment = new AddItems();
+                           selectedFragment = new ViewItems();
                            break;
+
+
                    }
                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
