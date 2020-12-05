@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,8 +28,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,11 +44,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap;
     int PLACE_PICKER_REQUEST =1;
@@ -73,9 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
 
 
 
@@ -93,26 +95,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         productSite_txt = findViewById(R.id.productSite);
         productPrice_txt = findViewById(R.id.productPrice);
         productImage = findViewById(R.id.productImage);
-        locations = findViewById(R.id.locations);
 
 
 
-
-        mapSelector.setOnClickListener(new View.OnClickListener() {
-            @SuppressWarnings("deprecation")
-            @Override
-            public void onClick(View v) {
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                try {
-                    startActivityForResult(builder.build(MapsActivity.this)
-                    ,PLACE_PICKER_REQUEST);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
 
 
@@ -237,45 +222,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-
-
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).draggable(true).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-        // Enable the zoom controls for the map
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                LatLng latLng = marker.getPosition();
-                Geocoder geocoder = new Geocoder(MapsActivity.this, Locale.getDefault());
-                try {
-                    android.location.Address address = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1).get(0);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-    }
 
 
 
@@ -314,24 +261,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private  android.net.Uri uploadPicture() {
+    private String uploadPicture() {
 
         final ProgressDialog pd = new ProgressDialog(MapsActivity.this);
         pd.setTitle("UploadingImage...");
         pd.show();
 
-        userId = fireAuth.getCurrentUser().getUid();
+       final String randomId = UUID.randomUUID().toString();
 
-        StorageReference productImages = mStorageRef.child("productImages/" +userId);
+        StorageReference productImages = mStorageRef.child("productImages/" +randomId);
 
         productImages.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                .addOnCompleteListener(task -> productImages.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    public void onSuccess(Uri uri) {
+
+                        Uri imageDownloadUrl = uri;;
+                        String url = imageDownloadUrl.toString();
+
                         pd.dismiss();
                         Toast.makeText(MapsActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
 
+
+
+
                     }
+                })).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                pd.dismiss();
+                Toast.makeText(MapsActivity.this, "image Failed To Upload", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                pd.setMessage("Percentage: " + (int) progressPercent + "%");
+
+
+            }
+        });;
+
+
+
+
+        productImages.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    pd.dismiss();
+                    Toast.makeText(MapsActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -349,7 +327,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-return imageUri;
+        return null;
+
     }
 
 

@@ -13,7 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.analytics.ecommerce.Product;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyAdapter extends PagerAdapter {
 
@@ -49,15 +54,18 @@ public class MyAdapter extends PagerAdapter {
         //TextView dateTv = view.findViewById(R.id.dateTv);
 
         MyModel model = modelArrayList.get(position);
-        String tittle = model.getTitle();
+        String name = model.getName();
         String description = model.getDescription();
         String date = model.getDate();
-        int image = model.getImage();
-
-        bannerIv.setImageResource(image);
-        titleTv.setText(tittle);
+        String image = model.getImage().trim();
+        Glide.with(context).load(image)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .disallowHardwareConfig()
+                .into(bannerIv);
+        titleTv.setText(name);
         descriptionTv.setText(description);
-       // dateTv.setText(date);
+
 
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +73,7 @@ public class MyAdapter extends PagerAdapter {
             public void onClick(View v) {
 
 
-                Toast.makeText(context,tittle+"\n"+ description+"\n"+date,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,name+"\n"+ description+"\n"+date,Toast.LENGTH_SHORT).show();
             }
         });
 

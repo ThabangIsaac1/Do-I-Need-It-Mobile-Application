@@ -34,6 +34,7 @@
     <string name="Api">AIzaSyADI0h-cdgHA698LP8MYNEwezBp8LUWkbc</string>
     <string name="title_activity_maps">Map</string>
     <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>
+    <string name="save_location">Save location</string>
 
 
 </resources>
