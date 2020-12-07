@@ -1,6 +1,7 @@
 package com.example.do_i_need_it;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -65,6 +67,7 @@ public class ViewItems extends Fragment  {
     public static final int REQUEST_CODE = 1;
     private StorageReference mStorageRef;
     private FirebaseStorage storage;
+    TextView note;
     private static final int ADDRESS_PICKER_REQUEST = 1020;
 
     private Uri imageUri;
@@ -110,7 +113,7 @@ public class ViewItems extends Fragment  {
         productPrice_txt = dialog.findViewById(R.id.productPrice);
         productImage = dialog.findViewById(R.id.productImage);
         productImage = dialog.findViewById(R.id.productImage);
-
+        note = view1.findViewById(R.id.note);
 
 
 
@@ -225,12 +228,13 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
 
         mFirestore = FirebaseFirestore.getInstance();
 
+
         Query query = mFirestore.collection("products").whereEqualTo("product_owner", fireAuth.getCurrentUser().getEmail());
         query.get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
-
+                        note.setVisibility(View.VISIBLE);
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             Log.d(String.valueOf(TAG), document.getId() + " => " + document.getData());
                             String prodId = document.getId().toString();
@@ -249,9 +253,14 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
                             String image_url = document.getString("image_url");
                             MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price);
 
+
+
+
+
                             modelArrayList.add(products);
                             myAdapter = new MyAdapter(getContext(), modelArrayList);
                             viewPager.setAdapter(myAdapter);
+                            note.setVisibility(View.INVISIBLE);
                             viewPager.setPadding(100, 0, 100, 0);
 
                         }

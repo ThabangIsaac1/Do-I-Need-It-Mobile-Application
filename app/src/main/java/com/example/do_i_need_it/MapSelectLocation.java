@@ -148,6 +148,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
         mProgressBar = findViewById(R.id.progress_bar);
         mSmallPinIv = findViewById(R.id.small_pin);
 
+
         final View icPin = findViewById(R.id.ic_pin);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -346,10 +347,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
 
 
 
-            final ProgressDialog pd = new ProgressDialog(MapSelectLocation.this);
-            pd.setTitle("UploadingImage...");
-            pd.setMessage("Image processing taking place....");
-            pd.show();
+
 
 
             final String randomId = UUID.randomUUID().toString();
@@ -362,7 +360,6 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
                         public void onSuccess(Uri uri) {
                             url = uri.toString();
 
-                                    pd.dismiss();
 
                             //Store Product Details To Firestore
 
