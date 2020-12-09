@@ -3,118 +3,98 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_vertical"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ProductDetails"
+    android:background="@color/black"
 
-    <androidx.cardview.widget.CardView
+    >
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="22dp"
-        android:backgroundTint="@color/fuel_orange"
+        android:layout_height="match_parent">
 
-
-        >
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="22dp"
+            tools:layout_editor_absoluteX="10dp">
 
             <ImageView
-                android:id="@+id/bannerIv"
-                android:src="@drawable/four"
+                android:id="@+id/imagesdisplay"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                />
+                android:src="@drawable/four"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/product_name"
+                android:id="@+id/displayproductname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:padding="8dp"
-                android:text="Addidas Laveto"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/black" />
+                android:ems="10"
+                android:layout_marginTop="260dp"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="@string/product_name"
+                android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/product_price"
+                android:id="@+id/displayproducturl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="P150.00"
+                android:ems="10"
+                android:layout_marginTop="320dp"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="@string/website_link"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                />
-            <View
+                android:autoLink="web" />
+
+            <fragment
+                android:id="@+id/display_item_location"
+                android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/black" />
-            <TextView
-                android:id="@+id/product_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="https://codinginflow.com/tutorials/android/custom-dialog-interface"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/black" />
+                android:layout_height="175dp"
+                android:layout_marginTop="360dp"/>
 
-            <TextView
-                android:id="@+id/product_description"
-                android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:minLines="3"
-                android:layout_marginLeft="8dp"
-                android:text="Adidas AG is a German multinational corporation, founded and headquartered in Herzogenaurach, Germany, that designs and manufactures shoes, clothing and accessories. "
-
-
-                />
-
-
-            <com.google.android.gms.maps.MapView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:map="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/mapView"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:clickable="true"
-                android:layout_marginTop="20dp"
-                map:uiCompass="true"
-                android:background="@color/black" />
-
-            <Button
-                android:id="@+id/share"
+            <ImageButton
+                android:id="@+id/deletebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
-                android:padding="4dp"
-                android:textAllCaps="false"
-                android:text="@string/share"
-                android:drawableLeft="@android:drawable/ic_menu_share"
-                android:fontFamily="@font/poppinssemibold"
-                android:textColor="@color/white"
-                 />
+                app:srcCompat="@drawable/ic_delete_outline_24"
+                tools:ignore="VectorDrawableCompat"
+                android:background="@null"
+                android:layout_marginTop="580dp"/>
 
-        </LinearLayout>
+            <ImageButton
+                android:id="@+id/sharebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_share_24"
+                android:layout_marginLeft="48dp"
+                tools:ignore="VectorDrawableCompat"
+                android:background="@null"
+                android:layout_marginTop="580dp"/>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="600dp"
+                android:layout_marginLeft="250dp"
+                android:text="Purchased"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/white"/>
 
 
+        </androidx.cardview.widget.CardView>
 
-    </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
 </LinearLayout>

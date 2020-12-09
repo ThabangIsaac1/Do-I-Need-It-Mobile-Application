@@ -21,6 +21,8 @@ FirebaseAuth fireAuth;
         txt = (TextView) findViewById(R.id.loginLink);
         button = (Button) findViewById(R.id.nextbtn);
 
+
+        //Check user has already logged in and redirect user to dashboard
         fireAuth = FirebaseAuth.getInstance();
         if(fireAuth.getCurrentUser() != null) {
          startActivity(new Intent(getApplicationContext(), MainActivity2.class));

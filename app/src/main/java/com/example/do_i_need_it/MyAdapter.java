@@ -5,29 +5,30 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.analytics.ecommerce.Product;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MyAdapter extends PagerAdapter {
+
+public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
     private Context context;
     private ArrayList<MyModel> modelArrayList;
 
+
     public  MyAdapter(Context context, ArrayList<MyModel> modelArrayList){
         this.context = context;
         this.modelArrayList = modelArrayList;
+
 
 
     }
@@ -51,7 +52,8 @@ public class MyAdapter extends PagerAdapter {
         ImageView bannerIv = view.findViewById(R.id.bannerIv);
         TextView titleTv = view.findViewById(R.id.titleTv);
         TextView descriptionTv = view.findViewById(R.id.description);
-        //TextView dateTv = view.findViewById(R.id.dateTv);
+        Button viewbtn = view.findViewById(R.id.btncard) ;
+
 
         MyModel model = modelArrayList.get(position);
         String name = model.getName();
@@ -68,19 +70,32 @@ public class MyAdapter extends PagerAdapter {
 
 
 
+//View Item properties
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
+                Intent intent = new Intent(context, ProductDetails.class);
+                intent.putExtra("product_id",model.getProductId());
+                intent.putExtra("display_product_name", model.getName());
+                intent.putExtra("display_url",model.getSite());
+                intent.putExtra("latitude",model.getLatitude());
+                intent.putExtra("longitude",model.getLongitude());
+                intent.putExtra("display_image",model.getImage());
+                intent.putExtra("display_address",model.getAddress());
+                context.startActivity(intent);
                 Toast.makeText(context,name+"\n"+ description+"\n"+date,Toast.LENGTH_SHORT).show();
+
             }
         });
 
 
   container.addView(view,position);
+
         return view;
     }
+
 
 
 
@@ -90,4 +105,8 @@ public class MyAdapter extends PagerAdapter {
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

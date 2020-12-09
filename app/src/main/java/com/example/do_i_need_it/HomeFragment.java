@@ -22,10 +22,13 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
@@ -79,9 +82,57 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        return  view1;
 
+
+
+        //Load array and get firestore instance.
+        ArrayList<MyModel> modelArrayList;
+        modelArrayList = new ArrayList<>();
+        mFirestore = FirebaseFirestore.getInstance();
+
+        Query query = mFirestore.collection("products").whereEqualTo("product_owner", firebaseAuth.getCurrentUser().getEmail());
+        query.get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+
+
+                        //Fetch from firebase all the documents
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            Log.d(String.valueOf(TAG), document.getId() + " => " + document.getData());
+                            String prodId = document.getId().toString();
+                            String date = document.getString("date_added");
+                            String productName = document.getString("product_name");
+                            String owner = document.getString("product_owner");
+                            String product_description = document.getString("product_description");
+                            String product_site = document.getString("product_site");
+                            String product_price = document.getString("product_price");
+                            String user_id = document.getString("user_id");
+                            String product_address = document.getString("product_address");
+                            int lat = document.getLong("latitude").intValue();
+                            String latitude = String.valueOf(lat);
+                            int longi = document.getLong("longitude").intValue();
+                            String longitude = String.valueOf(longi);
+                            String image_url = document.getString("image_url");
+                            MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price);
+
+                            //Add products to the list
+                            modelArrayList.add(products);
+
+                            //Display Number of total Products
+                            String number = String.valueOf(modelArrayList.size());
+                            numberOfProducts.setText(number);
+
+
+                        }
+                        Log.d(String.valueOf(TAG), "Array Items => " + modelArrayList.size());
+                    } else {
+                        Log.d(String.valueOf(TAG), "Error getting documents: ", task.getException());
+                    }
+                });
+        return  view1;
     }
+
+
 }
 
 

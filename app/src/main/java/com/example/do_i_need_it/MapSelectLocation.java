@@ -380,7 +380,6 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
                             productinformation.put("image_url",url);
 
 
-
                             product.set(productinformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

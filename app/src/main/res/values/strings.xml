@@ -22,7 +22,7 @@
     <string name="thabang">Thabang</string>
     <string name="image">Image</string>
     <string name="items_added">Items Added</string>
-    <string name="_10">10</string>
+    <string name="_10">0</string>
     <string name="items_pending">Items Pending</string>
     <string name="items_purchased">Items Purchased</string>
     <string name="items_deleted">Items Deleted</string>
@@ -36,6 +36,9 @@
     <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>
     <string name="save_location">Save location</string>
     <string name="you_have_no_products_in_your_list_yet">You Have No products In Your List Yet</string>
+    <string name="product_name">Product Name</string>
+    <string name="website_link">Website Link</string>
+    <string name="product_price">Product Price</string>
 
 
 </resources>

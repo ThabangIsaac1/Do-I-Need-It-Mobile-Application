@@ -128,7 +128,6 @@ public class ViewItems extends Fragment  {
                 dialog.setCanceledOnTouchOutside(true);
 
 
-
             }
 
         });
@@ -144,8 +143,6 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
         productDescription = productDescription_txt.getText().toString().trim();
         productPrice = productPrice_txt.getText().toString().trim();
         productSite = productSite_txt.getText().toString().trim();
-
-
 
         //Validation Of Form data
         if (TextUtils.isEmpty(productName)) {
@@ -182,10 +179,7 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
         startActivityForResult(intent, SimplePlacePicker.SELECT_LOCATION_REQUEST_CODE);
         dialog.dismiss();
 
-
         System.out.println("Image here" + imageUri);
-
-
 
 
     }
@@ -221,19 +215,17 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
 
     private void loadCards() {
 
-
+        //Load array and great firestore instance.
         modelArrayList = new ArrayList<>();
-
-
-
         mFirestore = FirebaseFirestore.getInstance();
-
 
         Query query = mFirestore.collection("products").whereEqualTo("product_owner", fireAuth.getCurrentUser().getEmail());
         query.get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
+
+                        //Fetch from firebase all the documents
                         note.setVisibility(View.VISIBLE);
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             Log.d(String.valueOf(TAG), document.getId() + " => " + document.getData());
@@ -253,15 +245,13 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
                             String image_url = document.getString("image_url");
                             MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price);
 
-
-
-
-
+                            //Add products to the list
                             modelArrayList.add(products);
                             myAdapter = new MyAdapter(getContext(), modelArrayList);
                             viewPager.setAdapter(myAdapter);
                             note.setVisibility(View.INVISIBLE);
                             viewPager.setPadding(100, 0, 100, 0);
+
 
                         }
                         Log.d(String.valueOf(TAG), "Array Items => " + modelArrayList.size());
@@ -269,10 +259,6 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
                         Log.d(String.valueOf(TAG), "Error getting documents: ", task.getException());
                     }
                 });
-
-
-
-
 
 
     }
@@ -291,8 +277,6 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_background)
                     .into(productImage);
-
-
 
         }
 
