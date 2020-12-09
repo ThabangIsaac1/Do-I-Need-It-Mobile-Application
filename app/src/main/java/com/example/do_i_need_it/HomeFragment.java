@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore mFirestore;
     String UserId;
-    TextView numberOfProducts;
+    TextView numberOfProducts,numberOfdeletedProducts;
 
     @Nullable
     @Override
@@ -55,11 +55,33 @@ public class HomeFragment extends Fragment {
         //Components Instances
         logout = view1.findViewById(R.id.logoutAction);
         numberOfProducts = view1.findViewById(R.id.addedTxtView);
+        numberOfdeletedProducts = view1.findViewById(R.id.deletedTxtView);
 
         if(UserId == null){
             Intent intent = new Intent (HomeFragment.this.getActivity(),UserLogin.class);
             startActivity(intent);
         }
+
+        mFirestore.collection("deleted_products").whereEqualTo("owner", firebaseAuth.getCurrentUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int count = 0;
+                            for (DocumentSnapshot document : task.getResult()) {
+                                count++;
+                                System.out.println("The size"+count);
+                                String total = String.valueOf(count);
+                                numberOfdeletedProducts.setText(total);
+                            }
+                        } else {
+                            Log.d(String.valueOf(TAG), "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
 
         mFirestore.collection("user").document(UserId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -113,7 +135,8 @@ public class HomeFragment extends Fragment {
                             int longi = document.getLong("longitude").intValue();
                             String longitude = String.valueOf(longi);
                             String image_url = document.getString("image_url");
-                            MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price);
+                            String status = document.getString("status");
+                            MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price,status);
 
                             //Add products to the list
                             modelArrayList.add(products);
@@ -121,6 +144,8 @@ public class HomeFragment extends Fragment {
                             //Display Number of total Products
                             String number = String.valueOf(modelArrayList.size());
                             numberOfProducts.setText(number);
+
+
 
 
                         }

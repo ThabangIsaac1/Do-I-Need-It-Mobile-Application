@@ -160,6 +160,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
         submitLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                submitLocationButton.setText(R.string.processing);
                 submitResultLocation();
             }
         });
@@ -334,7 +335,6 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
 
 //Get Product Details from Intent data
             Intent intent = getIntent();
-
             String productName = intent.getStringExtra("product_name");
             String productDescription = intent.getStringExtra("product_description");
             String productPrice = intent.getStringExtra("product_price");
@@ -359,7 +359,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
                         @Override
                         public void onSuccess(Uri uri) {
                             url = uri.toString();
-
+                                String status ="Pending";
 
                             //Store Product Details To Firestore
 
@@ -378,6 +378,8 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
                             productinformation.put("latitude", latitude);
                             productinformation.put("longitude", longitude);
                             productinformation.put("image_url",url);
+                            productinformation.put("status",status);
+
 
 
                             product.set(productinformation).addOnSuccessListener(new OnSuccessListener<Void>() {

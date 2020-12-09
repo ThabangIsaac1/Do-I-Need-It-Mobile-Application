@@ -56,17 +56,18 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
 
         MyModel model = modelArrayList.get(position);
-        String name = model.getName();
-        String description = model.getDescription();
-        String date = model.getDate();
-        String image = model.getImage().trim();
-        Glide.with(context).load(image)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
-                .disallowHardwareConfig()
-                .into(bannerIv);
-        titleTv.setText(name);
-        descriptionTv.setText(description);
+
+            String name = model.getName();
+            String description = model.getDescription();
+            String date = model.getDate();
+            String image = model.getImage().trim();
+            Glide.with(context).load(image)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background)
+                    .disallowHardwareConfig()
+                    .into(bannerIv);
+            titleTv.setText(name);
+            descriptionTv.setText(description);
 
 
 
@@ -85,7 +86,6 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
                 intent.putExtra("display_image",model.getImage());
                 intent.putExtra("display_address",model.getAddress());
                 context.startActivity(intent);
-                Toast.makeText(context,name+"\n"+ description+"\n"+date,Toast.LENGTH_SHORT).show();
 
             }
         });

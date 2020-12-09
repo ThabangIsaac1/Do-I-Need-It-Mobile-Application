@@ -98,6 +98,16 @@ public class MyModel {
     String userId;
     String site;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    String status;
+
     public String getProductId() {
         return productId;
     }
@@ -112,8 +122,9 @@ public class MyModel {
     String longitude;
     String price;
 
-    public MyModel(String productId,String name, String description, String date, String address, String owner, String userId, String site, String image, String latitude, String longitude, String price) {
+    public MyModel(String productId,String name, String description, String date, String address, String owner, String userId, String site, String image, String latitude, String longitude, String price,String status) {
         this.productId = productId;
+        this.status = status;
         this.name = name;
         this.description = description;
         this.date = date;

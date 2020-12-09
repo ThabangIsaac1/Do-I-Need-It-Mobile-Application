@@ -39,6 +39,7 @@
     <string name="product_name">Product Name</string>
     <string name="website_link">Website Link</string>
     <string name="product_price">Product Price</string>
+    <string name="processing">Processing Data</string>
 
 
 </resources>

@@ -243,7 +243,9 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
                             int longi = document.getLong("longitude").intValue();
                             String longitude = String.valueOf(longi);
                             String image_url = document.getString("image_url");
-                            MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price);
+                            String status = document.getString("status");
+
+                            MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price,status);
 
                             //Add products to the list
                             modelArrayList.add(products);

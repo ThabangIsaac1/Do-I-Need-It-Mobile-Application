@@ -4,11 +4,13 @@ package com.example.do_i_need_it;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +22,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ProductDetails extends AppCompatActivity implements OnMapReadyCallback {
     //Declarations Of Vraiables
@@ -31,6 +42,14 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
     private View mapView;
     Double latitiude, longitude;
 
+
+    //firebase
+    private StorageReference mStorageRef;
+    private FirebaseStorage storage;
+    FirebaseAuth fireAuth;
+    FirebaseFirestore fireStore;
+    String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +57,6 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
 
 
         //Initialize views
-
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.display_item_location);
         mapFragment.getMapAsync(this);
 
@@ -48,10 +66,15 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
         websitelink = findViewById(R.id.displayproducturl);
         displayimage = findViewById(R.id.imagesdisplay);
 
+        //Initialize Firebase
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        fireAuth = FirebaseAuth.getInstance();
+        fireStore = FirebaseFirestore.getInstance();
+        userId = fireAuth.getCurrentUser().getUid();
+
 
         //Get data from The Adapter
         Intent intent = getIntent();
-
         String productid = intent.getStringExtra("product_id");
         String display_product_name = intent.getStringExtra("display_product_name");
         String display_url = intent.getStringExtra("display_url");
@@ -76,6 +99,34 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW);
                 browserIntent.setData(Uri.parse(display_url));
                 startActivity(browserIntent);
+            }
+        });
+
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+
+                userId = fireAuth.getCurrentUser().getUid();
+
+                DocumentReference product = fireStore.collection("products").document(productid);
+                product.delete();
+
+
+                DocumentReference deleteditem = fireStore.collection("deleted_products").document(productid);
+                Map<String, Object> deletedproduct = new HashMap<>();
+                deletedproduct.put("status","Deleted");
+                deletedproduct.put("owner", fireAuth.getCurrentUser().getEmail());
+                deleteditem.set(deletedproduct);
+
+
+                Toast.makeText(ProductDetails.this, "Product Deleted", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(ProductDetails.this, MainActivity2.class);
+                startActivity(intent);
+
             }
         });
 
