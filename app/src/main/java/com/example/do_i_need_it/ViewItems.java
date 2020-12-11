@@ -1,7 +1,6 @@
 package com.example.do_i_need_it;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,28 +22,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.do_i_need_it.utils.SimplePlacePicker;
-import com.google.android.gms.analytics.ecommerce.Product;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -105,13 +92,11 @@ public class ViewItems extends Fragment  {
         dialog.setContentView(R.layout.custom_map);
 
 
-
         selectLocation = dialog.findViewById(R.id.mapSelect);
         productName_txt = dialog.findViewById(R.id.productName);
         productDescription_txt = dialog.findViewById(R.id.productDescription);
         productSite_txt = dialog.findViewById(R.id.productSite);
         productPrice_txt = dialog.findViewById(R.id.productPrice);
-        productImage = dialog.findViewById(R.id.productImage);
         productImage = dialog.findViewById(R.id.productImage);
         note = view1.findViewById(R.id.note);
 

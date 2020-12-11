@@ -36,7 +36,8 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
     //Declarations Of Vraiables
     TextView productname, websitelink;
     ImageView displayimage;
-    ImageButton delete, purchase, share;
+    ImageButton delete, share;
+    Button  purchase;
     String address;
     GoogleMap Map;
     private View mapView;
@@ -61,6 +62,8 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
 
         delete = findViewById(R.id.deletebtn);
+        share = findViewById(R.id.sharebtn);
+        purchase = findViewById(R.id.purchased_btn);
 
         productname = findViewById(R.id.displayproductname);
         websitelink = findViewById(R.id.displayproducturl);
@@ -103,7 +106,7 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
         });
 
 
-
+        //Delete Item
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -129,6 +132,48 @@ public class ProductDetails extends AppCompatActivity implements OnMapReadyCallb
 
             }
         });
+
+        //Share item to another App
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Send Item to another application
+                Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Check Out This Item I found   " +"Product Name   " + display_product_name + "\n" + "Image Url  "+ display_url +
+                        "\n" + "Location   "+ "\n" + address);
+
+                startActivity(sendIntent);
+            }
+        });
+
+        //Mark Item as Purchased
+
+        purchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                userId = fireAuth.getCurrentUser().getUid();
+
+                DocumentReference product = fireStore.collection("products").document(productid);
+                product.delete();
+
+
+                DocumentReference itemspurchased = fireStore.collection("purchasedItems").document(productid);
+                Map<String, Object> purchasedItems = new HashMap<>();
+                purchasedItems.put("status","Purchased");
+                purchasedItems.put("owner", fireAuth.getCurrentUser().getEmail());
+                itemspurchased.set(purchasedItems);
+
+                Toast.makeText(ProductDetails.this, "Finally Purchased", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(ProductDetails.this, MainActivity2.class);
+                startActivity(intent);
+
+            }
+        });
+
 
 
     }

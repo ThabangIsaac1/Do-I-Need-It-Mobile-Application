@@ -1,4 +1,18 @@
+/**
+ * The java class Home fragment Extends fragment
+ * Displays dashboard statistics and analytics
+ *Note application runs on a Nexus 5X API 30
+ * @author  Thabang Fenge Isaka
+ * @version 1.0
+ * @since   2020-11-16
+ */
+
+
+
 package com.example.do_i_need_it;
+
+
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,7 +53,7 @@ public class HomeFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore mFirestore;
     String UserId;
-    TextView numberOfProducts,numberOfdeletedProducts;
+    TextView numberOfProducts,numberOfdeletedProducts,purchasedItems;
 
     @Nullable
     @Override
@@ -56,12 +70,17 @@ public class HomeFragment extends Fragment {
         logout = view1.findViewById(R.id.logoutAction);
         numberOfProducts = view1.findViewById(R.id.addedTxtView);
         numberOfdeletedProducts = view1.findViewById(R.id.deletedTxtView);
+        purchasedItems = view1.findViewById(R.id.item_purchased);
 
+
+        //Check If User is logged In
         if(UserId == null){
             Intent intent = new Intent (HomeFragment.this.getActivity(),UserLogin.class);
             startActivity(intent);
         }
 
+
+        //Fetch Deleted Products
         mFirestore.collection("deleted_products").whereEqualTo("owner", firebaseAuth.getCurrentUser().getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -82,6 +101,29 @@ public class HomeFragment extends Fragment {
                 });
 
 
+        //Fetch Purchased Products
+
+        mFirestore.collection("purchasedItems").whereEqualTo("owner", firebaseAuth.getCurrentUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int count = 0;
+                            for (DocumentSnapshot document : task.getResult()) {
+                                count++;
+                                System.out.println("The size"+count);
+                                String total = String.valueOf(count);
+                                purchasedItems.setText(total);
+                            }
+                        } else {
+                            Log.d(String.valueOf(TAG), "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+        //Fetch users from database
 
         mFirestore.collection("user").document(UserId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -106,7 +148,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-
+        //Fetch the number of product items
         //Load array and get firestore instance.
         ArrayList<MyModel> modelArrayList;
         modelArrayList = new ArrayList<>();
