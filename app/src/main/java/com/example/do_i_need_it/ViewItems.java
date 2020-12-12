@@ -1,5 +1,13 @@
 package com.example.do_i_need_it;
-
+/**
+ * The java class ViewItems Extends Fragment
+ * This fragment displays products added in Firestore.
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,27 +48,28 @@ import static android.app.Activity.RESULT_OK;
 
 public class ViewItems extends Fragment  {
 
-
+    //Declaration of components and variables
     private static final Object TAG =null ;
     private Button selectLocation;
+    public static final int REQUEST_CODE = 1;
+    private StorageReference mStorageRef;
+    private FirebaseStorage storage;
+    private EditText productName_txt, productDescription_txt, productPrice_txt, productSite_txt;
+    private static final int ADDRESS_PICKER_REQUEST = 1020;
+    private Uri imageUri;
+    private ViewPager viewPager;
+    private ArrayList<MyModel> modelArrayList;
+    private MyAdapter myAdapter;
+
     String userId;
     FirebaseAuth fireAuth;
     FirebaseFirestore fireStore;
     FloatingActionButton popupBtn;
     ImageButton pickPlace;
     CircleImageView productImage;
-    private EditText productName_txt, productDescription_txt, productPrice_txt, productSite_txt;
     String productName, productDescription, productPrice, productSite;
-    public static final int REQUEST_CODE = 1;
-    private StorageReference mStorageRef;
-    private FirebaseStorage storage;
-    TextView note;
-    private static final int ADDRESS_PICKER_REQUEST = 1020;
 
-    private Uri imageUri;
-    private ViewPager viewPager;
-    private ArrayList<MyModel> modelArrayList;
-    private MyAdapter myAdapter;
+    TextView note;
     String apiKey;
     String country;
     String language;
@@ -171,7 +180,7 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
 });
 
 
-
+        //select image
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,6 +258,7 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
 
 
     }
+
 
 
 

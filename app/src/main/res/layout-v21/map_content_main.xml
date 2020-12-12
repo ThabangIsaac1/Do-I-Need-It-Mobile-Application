@@ -50,7 +50,8 @@
         app:mt_placeholder="Search place"
         app:mt_placeholderColor="@color/quantum_grey700"
         app:mt_roundedSearchBarEnabled="false"
-        app:mt_speechMode="false" />
+        app:mt_speechMode="false"
+        android:visibility="invisible"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

@@ -1,5 +1,13 @@
 package com.example.do_i_need_it;
-
+/**
+ * The java class ProductDetails Extends AppCompatActivity
+ * This displays the product details, deletes a product and shares a product with other apps.
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 
 import android.content.Intent;
 import android.net.Uri;

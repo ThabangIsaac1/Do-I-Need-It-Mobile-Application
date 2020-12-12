@@ -18,11 +18,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="4dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/grey"
         android:layout_marginBottom="4dp"
         android:backgroundTint="@color/fuel_orange"
         android:fontFamily="@font/gontserratbold"
-        android:hint="productName" />
+        android:hint="@string/product_nameupdateone" />
 
     <EditText
         android:id="@+id/updateproductDescription"
@@ -34,9 +34,9 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/fuel_orange"
         android:fontFamily="@font/gontserratbold"
-        android:hint="productDescription"
+        android:hint="@string/product_descriptionupdateone"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/grey" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,9 +51,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/fuel_orange"
             android:fontFamily="@font/gontserratbold"
-            android:hint="WebsiteUrl"
+            android:hint="@string/website_urlupdateone"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/productImage"
             app:layout_constraintHorizontal_bias="0.045"
@@ -66,9 +66,9 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/fuel_orange"
             android:fontFamily="@font/gontserratbold"
-            android:hint="productPrice"
+            android:hint="@string/product_priceupdateone"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/grey"
             app:layout_constraintBottom_toTopOf="@+id/productSite"
             app:layout_constraintEnd_toStartOf="@+id/productImage"
             app:layout_constraintHorizontal_bias="0.043"
@@ -79,7 +79,6 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:src="@drawable/four"
-
             app:civ_border_color="@color/fuel_orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,9 +98,9 @@
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/fuel_orange"
         android:fontFamily="@font/gontserratbold"
-        android:hint="productAddress"
+        android:hint="@string/product_addressupdateone"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/grey" />
 
     <EditText
         android:id="@+id/updatelatitude"
@@ -113,9 +112,9 @@
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/fuel_orange"
         android:fontFamily="@font/gontserratbold"
-        android:hint="Latitude"
+        android:hint="@string/latitudeupdateone"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/grey" />
 
     <EditText
         android:id="@+id/updatelongitude"
@@ -127,9 +126,9 @@
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/fuel_orange"
         android:fontFamily="@font/gontserratbold"
-        android:hint="Longitude"
+        android:hint="@string/longitudeupdateone"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/grey" />
 
     <Button
 

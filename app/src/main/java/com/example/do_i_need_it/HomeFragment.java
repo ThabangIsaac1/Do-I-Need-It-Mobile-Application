@@ -1,17 +1,15 @@
 /**
  * The java class Home fragment Extends fragment
  * Displays dashboard statistics and analytics
- *Note application runs on a Nexus 5X API 30
- * @author  Thabang Fenge Isaka
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
  * @version 1.0
- * @since   2020-11-16
+ * @since 2020-11-16
  */
 
 
-
 package com.example.do_i_need_it;
-
-
 
 
 import android.content.Intent;
@@ -25,14 +23,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,24 +36,25 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
 
+
+    //Decelerations of variables and components to be used in the class
     private static final Object TAG = null;
     TextView usernameView;
     ImageView logout;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore mFirestore;
     String UserId;
-    TextView numberOfProducts,numberOfdeletedProducts,purchasedItems;
+    TextView numberOfProducts, numberOfdeletedProducts, purchasedItems;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view1 = inflater.inflate(R.layout.fragment_dashboard,container,false);
+        View view1 = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         //Firebase Instance
         firebaseAuth = FirebaseAuth.getInstance();
@@ -74,13 +70,13 @@ public class HomeFragment extends Fragment {
 
 
         //Check If User is logged In
-        if(UserId == null){
-            Intent intent = new Intent (HomeFragment.this.getActivity(),UserLogin.class);
+        if (UserId == null) {
+            Intent intent = new Intent(HomeFragment.this.getActivity(), UserLogin.class);
             startActivity(intent);
         }
 
 
-        //Fetch Deleted Products
+        //Fetch Deleted Products according to product owner from database
         mFirestore.collection("deleted_products").whereEqualTo("owner", firebaseAuth.getCurrentUser().getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -90,7 +86,7 @@ public class HomeFragment extends Fragment {
                             int count = 0;
                             for (DocumentSnapshot document : task.getResult()) {
                                 count++;
-                                System.out.println("The size"+count);
+                                System.out.println("The size" + count);
                                 String total = String.valueOf(count);
                                 numberOfdeletedProducts.setText(total);
                             }
@@ -101,8 +97,7 @@ public class HomeFragment extends Fragment {
                 });
 
 
-        //Fetch Purchased Products
-
+        //Fetch Purchased Products for the user currently logged in
         mFirestore.collection("purchasedItems").whereEqualTo("owner", firebaseAuth.getCurrentUser().getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -112,7 +107,7 @@ public class HomeFragment extends Fragment {
                             int count = 0;
                             for (DocumentSnapshot document : task.getResult()) {
                                 count++;
-                                System.out.println("The size"+count);
+                                System.out.println("The size" + count);
                                 String total = String.valueOf(count);
                                 purchasedItems.setText(total);
                             }
@@ -123,8 +118,7 @@ public class HomeFragment extends Fragment {
                 });
 
 
-        //Fetch users from database
-
+        //Fetch users from database and display their user name in a textview
         mFirestore.collection("user").document(UserId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -134,14 +128,12 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-
-
+        //Log user out from system
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent (HomeFragment.this.getActivity(),UserLogin.class);
+                Intent intent = new Intent(HomeFragment.this.getActivity(), UserLogin.class);
                 startActivity(intent);
 
             }
@@ -178,7 +170,7 @@ public class HomeFragment extends Fragment {
                             String longitude = String.valueOf(longi);
                             String image_url = document.getString("image_url");
                             String status = document.getString("status");
-                            MyModel products = new MyModel(prodId,productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price,status);
+                            MyModel products = new MyModel(prodId, productName, product_description, date, product_address, owner, user_id, product_site, image_url, latitude, longitude, product_price, status);
 
                             //Add products to the list
                             modelArrayList.add(products);
@@ -188,15 +180,13 @@ public class HomeFragment extends Fragment {
                             numberOfProducts.setText(number);
 
 
-
-
                         }
                         Log.d(String.valueOf(TAG), "Array Items => " + modelArrayList.size());
                     } else {
                         Log.d(String.valueOf(TAG), "Error getting documents: ", task.getException());
                     }
                 });
-        return  view1;
+        return view1;
     }
 
 

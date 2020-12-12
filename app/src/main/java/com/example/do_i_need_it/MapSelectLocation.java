@@ -1,8 +1,16 @@
 package com.example.do_i_need_it;
+/**
+ * The java class MapSelection Extends AppCompatActivity
+ * This class is used to access a map and upload details of a product to firebase.
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -56,18 +64,14 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.mancj.materialsearchbar.adapter.SuggestionsAdapter;
 import com.skyfishjy.library.RippleBackground;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -130,6 +134,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_content_main);
 
+        //FirebaseStorage, FirebaseAuth and FirebaseFirestore instance.
         mStorageRef = FirebaseStorage.getInstance().getReference();
         fireAuth = FirebaseAuth.getInstance();
         fireStore = FirebaseFirestore.getInstance();
@@ -139,7 +144,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
         receiveIntent();
         initMapsAndPlaces();
     }
-
+        //initialise views or components
     private void initViews(){
         materialSearchBar = findViewById(R.id.searchBar);
         CustomButton submitLocationButton = findViewById(R.id.submit_location_button);
@@ -157,6 +162,8 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
             }
         }, 1000);
 
+
+        //OnClickListener to open location builder and upload products
         submitLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +174,8 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
 
     }
 
+
+    //Inetent to receive API keys and other variables from FetchPlace intent Service
     private void receiveIntent(){
         Intent intent = getIntent();
 
@@ -187,6 +196,8 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
+
+    //Initialise map and current location on the map
     private void initMapsAndPlaces() {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         Places.initialize(this, mApiKey);
@@ -262,6 +273,8 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
             }
         });
 
+
+        //Search bar to find locations by name
         materialSearchBar.setSuggestionsClickListener(new SuggestionsAdapter.OnItemViewClickListener() {
             @Override
             public void OnItemClickListener(int position, View v) {
@@ -333,7 +346,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
             Toast.makeText(MapSelectLocation.this, "Failed", Toast.LENGTH_SHORT).show();
         } else {
 
-//Get Product Details from Intent data
+            //Get Product Details from Intent data
             Intent intent = getIntent();
             String productName = intent.getStringExtra("product_name");
             String productDescription = intent.getStringExtra("product_description");
@@ -386,7 +399,7 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
                                 @Override
                                 public void onSuccess(Void aVoid) {
 
-                                        // 5. Confirm success
+                                        //  Confirm success
                                     new SweetAlertDialog(MapSelectLocation.this, SweetAlertDialog.WARNING_TYPE)
                                             .setTitleText("Do you really need this item?")
                                             .setContentText("Take time and ponder about it Later")
@@ -572,8 +585,6 @@ public class MapSelectLocation extends AppCompatActivity implements OnMapReadyCa
 
     protected void startIntentService() {
         currentMarkerPosition = mMap.getCameraPosition().target;
-
-
 
         AddressResultReceiver resultReceiver = new AddressResultReceiver(new Handler());
 

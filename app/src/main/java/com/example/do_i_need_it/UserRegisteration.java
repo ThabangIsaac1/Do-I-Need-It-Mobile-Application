@@ -1,11 +1,14 @@
 package com.example.do_i_need_it;
 
-/*
-Developer:Thabang Isaka
-Date:09 November 2020
-App Name: Do I need It
-*/
-
+/**
+ * The java class UserRegisteration Extends AppCompatActivity
+ * This class regsiters a user using FirebaseAuth
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 

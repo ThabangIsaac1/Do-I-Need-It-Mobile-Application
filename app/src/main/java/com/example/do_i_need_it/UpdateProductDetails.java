@@ -1,5 +1,13 @@
 package com.example.do_i_need_it;
-
+/**
+ * The java class UpdateProductDetails Extends AppCompatActivity
+ * This class updates product information for a user.
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +37,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class UpdateProductDetails  extends AppCompatActivity {
 
+    //D eclaration of Variables  and Components to be used.
     EditText productName_txt,productDescription_txt,productPrice_txt,productSite_txt,productAddress_txt,latitude_txt,longitude_txt;
     ImageView productImage;
     String userId;
@@ -48,7 +57,7 @@ public class UpdateProductDetails  extends AppCompatActivity {
         setContentView(R.layout.update_items);
 
 
-
+        //Firebase Instances
         storage = FirebaseStorage.getInstance();
         mStorageRef = storage.getReference();
         fireAuth = FirebaseAuth.getInstance();
@@ -58,7 +67,7 @@ public class UpdateProductDetails  extends AppCompatActivity {
         Button updateItem = findViewById(R.id.updateitem) ;
 
 
-
+        //Instantiate views
         productName_txt = findViewById(R.id.updateproductName);
         productDescription_txt = findViewById(R.id.updateproductDescription);
         productPrice_txt = findViewById(R.id.updateproductPrice);
@@ -100,7 +109,7 @@ public class UpdateProductDetails  extends AppCompatActivity {
             }
         });
 
-
+        //Collect prodcut infromation and update it on Firebase
         updateItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,10 +125,6 @@ public class UpdateProductDetails  extends AppCompatActivity {
 
 
 
-
-
-
-
                 String productName = productName_txt.getText().toString();
                 String productDescription = productDescription_txt.getText().toString();
                 String productPrice = productPrice_txt.getText().toString();
@@ -129,14 +134,6 @@ public class UpdateProductDetails  extends AppCompatActivity {
                 String longitudes = longitude_txt.getText().toString();
                 Double latitude = Double.valueOf(latitudes);
                 Double longitude = Double.valueOf(longitudes);
-
-
-
-
-
-
-
-
 
 
 
@@ -153,8 +150,7 @@ public class UpdateProductDetails  extends AppCompatActivity {
 
 
 
-
-
+                //Update Products to Firestore
                 fireStore.collection("products").document(product_id).update(updateproductinformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

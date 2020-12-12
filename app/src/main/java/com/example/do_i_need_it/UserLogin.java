@@ -1,5 +1,13 @@
 package com.example.do_i_need_it;
-
+/**
+ * The java class UserLogin Extends AppCompatActivity
+ * This class authenticates a user using FirebaseAuth
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,7 +119,7 @@ public class UserLogin extends AppCompatActivity {
             }
         });
 
-
+//Android location permission request
     }
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -120,20 +128,18 @@ public class UserLogin extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+
                 new AlertDialog.Builder(this)
                         .setTitle("Permission Request")
                         .setMessage("This App requires your location to work. Activate Your Location please.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
+
                                 ActivityCompat.requestPermissions(UserLogin.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -144,7 +150,6 @@ public class UserLogin extends AppCompatActivity {
 
 
             } else {
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -164,20 +169,17 @@ public class UserLogin extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // location-related task you need to do.
+                    // permission was granted
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
-                        //Request location updates:
-                      //  locationManager.requestLocationUpdates(provider, 400, 1, this);
+
                     }
 
                 } else {
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Permission", Toast.LENGTH_SHORT).show();
 
                 }
                 return;

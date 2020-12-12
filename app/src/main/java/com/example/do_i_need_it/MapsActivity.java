@@ -1,8 +1,18 @@
 package com.example.do_i_need_it;
+/**
+ * The java class MapsActivity Extends FragmentActivity
+ * This class where a user adds a product coupled with a GeoTag from a map.
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -37,25 +47,24 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MapsActivity extends FragmentActivity {
 
+
+    //Declarations of components and variables to be used
     private GoogleMap mMap;
-    int PLACE_PICKER_REQUEST =1;
-    private Button addRecordBtn,mapSelector;
+    int PLACE_PICKER_REQUEST = 1;
+    private Button addRecordBtn, mapSelector;
+    public static final int REQUEST_CODE = 1;
+    private StorageReference mStorageRef;
+    private FirebaseStorage storage;
+    private static final int ADDRESS_PICKER_REQUEST = 1020;
+    private Uri imageUri;
+    private EditText productName_txt, productDescription_txt, productPrice_txt, productSite_txt;
     String userId;
     FirebaseAuth fireAuth;
     FirebaseFirestore fireStore;
     ImageButton pickPlace;
     CircleImageView productImage;
     TextView locations;
-    private EditText productName_txt, productDescription_txt, productPrice_txt, productSite_txt;
     String productName, productDescription, productPrice, productSite;
-    public static final int REQUEST_CODE = 1;
-    private StorageReference mStorageRef;
-    private FirebaseStorage storage;
-    private static final int ADDRESS_PICKER_REQUEST = 1020;
-
-    private Uri imageUri;
-
-
 
 
     @Override
@@ -63,9 +72,6 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_items);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
-
-
 
         storage = FirebaseStorage.getInstance();
         mStorageRef = storage.getReference();
@@ -75,17 +81,12 @@ public class MapsActivity extends FragmentActivity {
 
 
         //addRecordBtn =findViewById(R.id.upload);
-       // mapSelector =findViewById(R.id.Change);
+        // mapSelector =findViewById(R.id.Change);
         productName_txt = findViewById(R.id.productName);
         productDescription_txt = findViewById(R.id.productDescription);
         productSite_txt = findViewById(R.id.productSite);
         productPrice_txt = findViewById(R.id.productPrice);
         productImage = findViewById(R.id.productImage);
-
-
-
-
-
 
 
         //Locate Image and upload it to database
@@ -98,7 +99,6 @@ public class MapsActivity extends FragmentActivity {
 
 
         });
-
 
 
         //Add product Information to the database
@@ -142,19 +142,15 @@ public class MapsActivity extends FragmentActivity {
                 productinformation.put("product_site", productSite);
                 productinformation.put("product_price", productPrice);
                 productinformation.put("user_id", userId);
-                productinformation.put("image_url",imageUri.toString());
+                productinformation.put("image_url", imageUri.toString());
 
 
                 product.set(productinformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        //Log.d(TAG, "Product details successfully stored.");
 
 
-
-
-
-                        // 5. Confirm success
+                        //  Confirm success
                         new SweetAlertDialog(MapsActivity.this, SweetAlertDialog.WARNING_TYPE)
                                 .setTitleText("Do you really need this item?")
                                 .setContentText("Take time and ponder about it Later")
@@ -173,10 +169,8 @@ public class MapsActivity extends FragmentActivity {
                                 .show();
 
 
-
-
-
                     }
+                    //Failure listener to handle errors
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -191,6 +185,7 @@ public class MapsActivity extends FragmentActivity {
 
 
     }
+
     //Select Image
     private void chooseImage() {
 
@@ -199,19 +194,9 @@ public class MapsActivity extends FragmentActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), 1);
     }
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
 
 
-
-
+    //Confirm if image has been selected in order to upload to firebase.
     @SuppressWarnings("deprecation")
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -221,15 +206,13 @@ public class MapsActivity extends FragmentActivity {
             imageUri = data.getData();
             productImage.setImageURI(imageUri);
             uploadPicture();
-
-
         }
+        //Open place picker to fetch location specified by user.
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (requestCode == RESULT_OK) {
 
-        if (requestCode == PLACE_PICKER_REQUEST){
-            if (requestCode == RESULT_OK){
-
-                Place place =PlacePicker.getPlace(data,this);
-                StringBuilder  stringBuilder = new StringBuilder();
+                Place place = PlacePicker.getPlace(data, this);
+                StringBuilder stringBuilder = new StringBuilder();
                 String latitude = String.valueOf(place.getLatLng().latitude);
                 String longitude = String.valueOf(place.getLatLng().longitude);
                 stringBuilder.append("LATITUDE :");
@@ -237,38 +220,33 @@ public class MapsActivity extends FragmentActivity {
                 stringBuilder.append("\n");
                 stringBuilder.append(longitude);
                 locations.setText(stringBuilder.toString());
-
-
-
-
-
             }
         }
 
     }
 
+    //Upload image and fetch string url of image.
     private String uploadPicture() {
 
         final ProgressDialog pd = new ProgressDialog(MapsActivity.this);
         pd.setTitle("UploadingImage...");
         pd.show();
 
-       final String randomId = UUID.randomUUID().toString();
+        final String randomId = UUID.randomUUID().toString();
 
-        StorageReference productImages = mStorageRef.child("productImages/" +randomId);
+        StorageReference productImages = mStorageRef.child("productImages/" + randomId);
 
         productImages.putFile(imageUri)
                 .addOnCompleteListener(task -> productImages.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
 
-                        Uri imageDownloadUrl = uri;;
+                        Uri imageDownloadUrl = uri;
+                        ;
                         String url = imageDownloadUrl.toString();
 
                         pd.dismiss();
                         Toast.makeText(MapsActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
-
-
 
 
                     }
@@ -286,11 +264,11 @@ public class MapsActivity extends FragmentActivity {
 
 
             }
-        });;
+        });
+        ;
 
 
-
-
+        //upload image to storage and save product to FireStore.
         productImages.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> {
                     pd.dismiss();

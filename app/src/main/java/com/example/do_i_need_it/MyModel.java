@@ -1,4 +1,13 @@
 package com.example.do_i_need_it;
+/**
+ * Class Model used to create the specification of a product
+ * Consists of a constructor and getters and setters
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 
 public class MyModel {
 

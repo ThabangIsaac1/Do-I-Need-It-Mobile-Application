@@ -18,11 +18,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="4dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/grey"
         android:layout_marginBottom="4dp"
         android:backgroundTint="@color/fuel_orange"
         android:fontFamily="@font/gontserratbold"
-        android:hint="productName" />
+        android:hint="@string/product_nameupdateone" />
 
     <EditText
         android:id="@+id/productDescription"
@@ -34,9 +34,9 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/fuel_orange"
         android:fontFamily="@font/gontserratbold"
-        android:hint="productDescription"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/grey"
+        android:hint="@string/product_descriptionupdateone"
+        android:textColor="@color/white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,9 +51,9 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/fuel_orange"
             android:fontFamily="@font/gontserratbold"
-            android:hint="WebsiteUrl"
+            android:textColorHint="@color/grey"
+            android:hint="@string/website_urlupdateone"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/productImage"
             app:layout_constraintHorizontal_bias="0.045"
@@ -66,9 +66,9 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/fuel_orange"
             android:fontFamily="@font/gontserratbold"
-            android:hint="productPrice"
+            android:textColorHint="@color/grey"
+            android:hint="@string/product_priceupdateone"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/productSite"
             app:layout_constraintEnd_toStartOf="@+id/productImage"
             app:layout_constraintHorizontal_bias="0.043"

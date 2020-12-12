@@ -1,5 +1,13 @@
 package com.example.do_i_need_it;
-
+/**
+ * The java class ProfileFragment Extends Fragment
+ * It displays the user details
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -65,7 +73,8 @@ public class ProfileFragment extends Fragment {
         updateUsernameTxt = view1.findViewById(R.id.profusername);
         updatePasswordTxt = view1.findViewById(R.id.profpassword);
         updateProfileBtb =view1.findViewById(R.id.profupdatebtn);
-//Check If user is logged in
+
+            //Check If user is logged in
         if(UserId == null){
             Intent intent = new Intent (ProfileFragment.this.getActivity(),UserLogin.class);
             startActivity(intent);
@@ -86,7 +95,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-
+        //Update user profile
         updateProfileBtb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,11 +104,6 @@ public class ProfileFragment extends Fragment {
                 updateEmail =  updateEmailTxt.getText().toString().trim();
                 UpdateUsername =  updateUsernameTxt.getText().toString().trim();
                 updatePassword = updatePasswordTxt.getText().toString().trim();
-
-
-
-
-
 
 
 

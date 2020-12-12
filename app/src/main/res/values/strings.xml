@@ -40,6 +40,14 @@
     <string name="website_link">Website Link</string>
     <string name="product_price">Product Price</string>
     <string name="processing">Processing Data</string>
+    <string name="view_products">View Products</string>
+    <string name="longitudeupdateone">Longitude</string>
+    <string name="latitudeupdateone">Latitude</string>
+    <string name="product_addressupdateone">Product Address</string>
+    <string name="product_priceupdateone">Product Price</string>
+    <string name="website_urlupdateone">Website Url</string>
+    <string name="product_descriptionupdateone">Product Description</string>
+    <string name="product_nameupdateone">Product Name</string>
 
 
 </resources>

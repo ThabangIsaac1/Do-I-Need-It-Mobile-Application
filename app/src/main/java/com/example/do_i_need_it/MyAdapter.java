@@ -1,6 +1,13 @@
 package com.example.do_i_need_it;
-
-import android.app.Activity;
+/**
+ * The java class MyAdapter Extends PagerAdapter
+ * This class is used to fetch and display items from firebase to a Page Viewer
+ * Note application runs on a Nexus 5X API 30
+ *
+ * @author Thabang Fenge Isaka
+ * @version 1.0
+ * @since 2020-11-16
+ */
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -39,12 +46,14 @@ import static android.app.Activity.RESULT_OK;
 
 public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
+
+    //Declare variables and components
     private Context context;
+    private StorageReference mStorageRef;
+    private FirebaseStorage storage;
     private ArrayList<MyModel> modelArrayList;
     String userId;
     FirebaseAuth fireAuth;
-    private StorageReference mStorageRef;
-    private FirebaseStorage storage;
     FirebaseFirestore fireStore;
     EditText productName_txt,productDescription_txt,productPrice_txt,productSite_txt,productAddress_txt,latitude_txt,longitude_txt;
     ImageView productImage;
@@ -59,7 +68,7 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
         this.context = context;
         this.modelArrayList = modelArrayList;
 
-
+        //Firebase Instances
         storage = FirebaseStorage.getInstance();
         mStorageRef = storage.getReference();
         fireAuth = FirebaseAuth.getInstance();
@@ -68,7 +77,7 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
 
     }
-
+    //Count array size
     @Override
     public int getCount() {
        return  modelArrayList.size();
@@ -83,6 +92,7 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
+        //Inflate card item and display products from array into it.
         View view = LayoutInflater.from(context).inflate(R.layout.card_item,container,false);
         Dialog dialog = new Dialog(context);
 
@@ -109,10 +119,10 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
         dialog.setTitle("Edit Item");
 
-        // inflate the layout
+
         dialog.setContentView(R.layout.update_items);
 
-
+        //Fetch text from dialog input fields
         productName_txt = dialog.findViewById(R.id.updateproductName);
         productDescription_txt = dialog.findViewById(R.id.updateproductDescription);
         productPrice_txt = dialog.findViewById(R.id.updateproductPrice);
@@ -126,14 +136,11 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
 
 
-
-
-
-
         productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Send array data to UpdateProductDetails  class to update the item information.
                 Intent intent = new Intent(context, UpdateProductDetails.class);
                 intent.putExtra("product_id",model.getProductId());
                 intent.putExtra("display_product_name", model.getName());
@@ -153,12 +160,12 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
 
 
-//View Item properties
+            //View Item properties
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                //Send array data to ProductDetails  class to view the item in detail.
                 Intent intent = new Intent(context, ProductDetails.class);
                 intent.putExtra("product_id",model.getProductId());
                 intent.putExtra("display_product_name", model.getName());
@@ -171,6 +178,8 @@ public class MyAdapter extends PagerAdapter implements View.OnClickListener  {
 
             }
         });
+
+
 
         updateItem.setOnClickListener(new View.OnClickListener() {
             @Override
