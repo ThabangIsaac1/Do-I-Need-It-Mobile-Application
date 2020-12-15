@@ -217,8 +217,7 @@ selectLocation.setOnClickListener(new View.OnClickListener() {
         query.get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
-
+                        
                         //Fetch from firebase all the documents
                         note.setVisibility(View.VISIBLE);
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
